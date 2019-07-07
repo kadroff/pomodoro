@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { CodeTimer } from "./components/CodeTimer.jsx";
+import { SocialTimer } from "./components/SocialTimer.jsx";
 
 function App() {
+  const [code, setCode] = useState(true);
+
+  const changeButton = props => {
+    if (props === "code") {
+      setCode(true);
+    } else {
+      setCode(false);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <a className="github_logo" href="https://github.com/kadroff/">
+        <img src={require("./github.png")} alt="Github" />
+      </a>
+      <button onClick={() => changeButton("code")}>Code</button>
+      <button onClick={() => changeButton("social")}>Social</button>
+      {code ? <CodeTimer /> : <SocialTimer />}
     </div>
   );
 }
